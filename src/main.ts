@@ -3,15 +3,22 @@ const sampleComplaint =
 
 const complaintInput = document.querySelector<HTMLTextAreaElement>("#complaint");
 const generateButton = document.querySelector<HTMLButtonElement>("#generate-button");
-const unlockButton = document.querySelector<HTMLButtonElement>("#unlock-button");
+const checkoutButton = document.querySelector<HTMLButtonElement>("#checkout-button");
 const sampleButton = document.querySelector<HTMLButtonElement>("#sample-button");
 const copyButton = document.querySelector<HTMLButtonElement>("#copy-button");
+const checkoutEmail = document.querySelector<HTMLInputElement>("#checkout-email");
 const lockedState = document.querySelector<HTMLElement>("#locked-state");
 const ticketState = document.querySelector<HTMLElement>("#ticket-state");
 const ticketOutput = document.querySelector<HTMLElement>("#ticket-output");
 const planPill = document.querySelector<HTMLElement>("#plan-pill");
+const paymentStatus = document.querySelector<HTMLElement>("#payment-status");
 
-let hasPaidPlan = localStorage.getItem("bugbite-plan") === "pro";
+let hasPaidPlan = localStorage.getItem("bugbite-access") === "pro";
+
+const setPaymentStatus = (message: string) => {
+  if (!paymentStatus) return;
+  paymentStatus.textContent = message;
+};
 
 const setPaidState = () => {
   if (!lockedState || !ticketState || !planPill) return;
@@ -20,6 +27,38 @@ const setPaidState = () => {
   ticketState.classList.toggle("hidden", !hasPaidPlan);
   planPill.textContent = hasPaidPlan ? "Pro plan" : "Free plan";
   planPill.classList.toggle("paid", hasPaidPlan);
+};
+
+const getCheckoutSessionId = () => {
+  const params = new URLSearchParams(window.location.search);
+  return (
+    params.get("session") ||
+    params.get("session_id") ||
+    params.get("checkout_id") ||
+    params.get("id")
+  );
+};
+
+const verifyCheckout = async (sessionId: string) => {
+  setPaymentStatus("Verifying Bags checkout...");
+
+  const response = await fetch(`/api/bags/session?id=${encodeURIComponent(sessionId)}`);
+  const data = await response.json();
+
+  if (!response.ok) {
+    throw new Error(data.error || "Could not verify checkout.");
+  }
+
+  if (data.access === "pro") {
+    hasPaidPlan = true;
+    localStorage.setItem("bugbite-access", "pro");
+    setPaidState();
+    setPaymentStatus("Payment verified. Pro is unlocked.");
+    window.history.replaceState({}, "", window.location.pathname);
+    return;
+  }
+
+  setPaymentStatus(`Checkout status: ${data.checkout?.status || "pending"}. Refresh after payment settles.`);
 };
 
 const scoreSeverity = (text: string) => {
@@ -66,10 +105,34 @@ sampleButton?.addEventListener("click", () => {
   complaintInput.focus();
 });
 
-unlockButton?.addEventListener("click", () => {
-  hasPaidPlan = true;
-  localStorage.setItem("bugbite-plan", "pro");
-  setPaidState();
+checkoutButton?.addEventListener("click", async () => {
+  try {
+    checkoutButton.disabled = true;
+    setPaymentStatus("Creating Bags checkout...");
+
+    const response = await fetch("/api/bags/checkout", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({
+        email: checkoutEmail?.value.trim() || undefined
+      })
+    });
+    const data = await response.json();
+
+    if (!response.ok) {
+      throw new Error(data.error || "Could not create Bags checkout.");
+    }
+
+    const checkoutUrl = data.checkout?.url;
+    if (!checkoutUrl) {
+      throw new Error("Bags did not return a checkout URL.");
+    }
+
+    window.location.href = checkoutUrl;
+  } catch (error) {
+    setPaymentStatus(error instanceof Error ? error.message : "Checkout failed.");
+    checkoutButton.disabled = false;
+  }
 });
 
 generateButton?.addEventListener("click", () => {
@@ -104,3 +167,10 @@ document.querySelectorAll("button").forEach((button) => {
 });
 
 setPaidState();
+
+const sessionId = getCheckoutSessionId();
+if (!hasPaidPlan && sessionId) {
+  verifyCheckout(sessionId).catch((error) => {
+    setPaymentStatus(error instanceof Error ? error.message : "Could not verify checkout.");
+  });
+}

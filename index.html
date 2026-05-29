@@ -17,7 +17,7 @@
           <span class="brand-mark">B</span>
           <span>BugBite</span>
         </a>
-        <div class="plan-pill" id="plan-pill">Free plan</div>
+        <div class="plan-pill" id="plan-pill">Checking plan</div>
       </header>
 
       <section class="hero">
@@ -47,19 +47,25 @@
 
         <div class="result-panel" id="result-panel">
           <div class="locked-state" id="locked-state">
-            <span class="lock-icon">LOCK</span>
+            <span class="lock-icon">BAGS</span>
             <h2>Paid plan required</h2>
             <p>
-              BugBite keeps the generator behind a plan layer. Upgrade to Pro
-              to unlock ticket generation for this test app.
+              BugBite uses Bags hosted checkout for Pro access. Pay once with
+              USDC, return here, and the app verifies the checkout before
+              unlocking the generator.
             </p>
+            <label class="email-field">
+              <span>Email for receipt</span>
+              <input id="checkout-email" type="email" placeholder="you@example.com" />
+            </label>
             <div class="price-row">
               <strong>$9</strong>
-              <span>/ month</span>
+              <span>one-time test plan</span>
             </div>
-            <button class="primary-button" id="unlock-button" type="button">
-              Simulate paid plan
+            <button class="primary-button" id="checkout-button" type="button">
+              Pay with Bags
             </button>
+            <p class="payment-status" id="payment-status"></p>
           </div>
 
           <div class="ticket-state hidden" id="ticket-state">

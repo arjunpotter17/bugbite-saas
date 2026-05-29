@@ -2,7 +2,23 @@
 
 BugBite is a tiny SaaS test app with one task: turn a messy customer complaint into a clean bug ticket.
 
-The generator is locked behind a simple paid-plan layer. For testing, the "Simulate paid plan" button stores a local Pro state and unlocks the tool.
+The generator is locked behind a Bags payment layer. The browser calls local Vercel API routes, those routes create and verify Bags checkout sessions server-side, and the tool unlocks only after Bags reports the checkout as complete.
+
+## Bags environment
+
+Set these in Vercel before production checkout will work:
+
+```bash
+BAGS_API_KEY=bag_test_...
+BAGS_PRODUCT_ID=<bags-product-uuid>
+BAGS_NETWORK=base_sepolia
+```
+
+Optional:
+
+```bash
+BAGS_API_BASE_URL=https://getbags.app
+```
 
 ## Run locally
 
