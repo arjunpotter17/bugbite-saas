@@ -63,7 +63,8 @@ module.exports = async function handler(request, response) {
     method: "POST",
     headers: {
       authorization: `Bearer ${process.env.BAGS_API_KEY}`,
-      "content-type": "application/json"
+      "content-type": "application/json",
+      "idempotency-key": `bugbite-checkout-${Date.now()}-${Math.random().toString(36).slice(2)}`
     },
     body: JSON.stringify(payload)
   });

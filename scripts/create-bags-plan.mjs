@@ -13,7 +13,8 @@ const bagsFetch = async (path, body) => {
     method: "POST",
     headers: {
       authorization: `Bearer ${apiKey}`,
-      "content-type": "application/json"
+      "content-type": "application/json",
+      "idempotency-key": `bugbite-${Date.now()}-${Math.random().toString(36).slice(2)}`
     },
     body: JSON.stringify(body)
   });
@@ -27,7 +28,7 @@ const bagsFetch = async (path, body) => {
   return data.data;
 };
 
-const product = await bagsFetch("/api/v1/products", {
+const product = await bagsFetch("/api/products", {
   name: "BugBite Pro",
   description: "One-time access to the BugBite complaint-to-ticket generator.",
   amount: "1.00",
@@ -37,7 +38,7 @@ const product = await bagsFetch("/api/v1/products", {
   mode: apiKey.startsWith("bag_live_") ? "live" : "test"
 });
 
-const paymentLink = await bagsFetch("/api/v1/payment-links", {
+const paymentLink = await bagsFetch("/api/payment-links", {
   productId: product.id,
   network,
   name: "BugBite Pro",
@@ -60,7 +61,7 @@ console.log(
     {
       productId: product.id,
       paymentLinkId: paymentLink.id,
-      paymentLinkUrl: paymentLink.url,
+      paymentLinkUrl: paymentLink.url || `${apiBaseUrl}/pay/${paymentLink.id}`,
       network
     },
     null,
