@@ -1,6 +1,6 @@
-# PulsePlane
+# KilnQueue
 
-PulsePlane is a compact SaaS infrastructure command center for monitoring tenant health, deploy velocity, incident pressure, and cloud spend drift.
+KilnQueue is a simple SaaS product mockup for ceramics studios. It helps studio managers track kiln bookings, shelf space, firing notes, member pickups, and unbilled firing fees.
 
 ## Run locally
 

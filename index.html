@@ -5,168 +5,197 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="PulsePlane is a SaaS infrastructure command center for deploys, incidents, tenants, and cost drift."
+      content="KilnQueue helps ceramics studios manage kiln bookings, shelf space, firing notes, and member pickups."
     />
-    <title>PulsePlane</title>
+    <title>KilnQueue</title>
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <div class="shell">
+    <div class="app-shell">
       <aside class="sidebar" aria-label="Primary">
-        <a class="brand" href="/" aria-label="PulsePlane home">
-          <span class="brand-mark">P</span>
+        <a class="brand" href="/" aria-label="KilnQueue home">
+          <span class="brand-mark">KQ</span>
           <span>
-            <strong>PulsePlane</strong>
-            <small>infra ops</small>
+            <strong>KilnQueue</strong>
+            <small>studio firing desk</small>
           </span>
         </a>
 
         <nav class="nav">
-          <a class="active" href="#overview">Overview</a>
-          <a href="#deploys">Deploys</a>
-          <a href="#tenants">Tenants</a>
-          <a href="#incidents">Incidents</a>
-          <a href="#costs">Costs</a>
+          <a class="active" href="#queue">Queue</a>
+          <a href="#members">Members</a>
+          <a href="#calendar">Calendar</a>
+          <a href="#notes">Notes</a>
+          <a href="#billing">Billing</a>
         </nav>
 
-        <div class="environment">
-          <span>Environment</span>
-          <strong>Production</strong>
-          <small>us-east-1, eu-west-1, ap-south-1</small>
+        <div class="studio-card">
+          <span>Studio</span>
+          <strong>North Loop Clay</strong>
+          <small>3 kilns - 148 active makers</small>
         </div>
       </aside>
 
       <main>
-        <header class="topbar">
+        <header class="hero">
           <div>
-            <p class="eyebrow">SaaS infrastructure cockpit</p>
-            <h1>Tenant health, deploy velocity, and cost drift in one sharp view.</h1>
+            <p class="eyebrow">Simple SaaS product</p>
+            <h1>Kiln scheduling that keeps small ceramics studios calm.</h1>
+            <p class="subhead">
+              Track shelf space, firing windows, member pieces, glaze risk, and
+              pickup status without running the whole studio from a group chat.
+            </p>
           </div>
-          <div class="actions">
-            <button class="icon-button" type="button" aria-label="Search">⌕</button>
-            <button class="icon-button" type="button" aria-label="Alerts">!</button>
-            <button class="primary-button" type="button">Ship deploy</button>
+          <div class="hero-actions">
+            <button class="icon-button" type="button" aria-label="Search bookings">?</button>
+            <button class="icon-button" type="button" aria-label="Notifications">!</button>
+            <button class="primary-button" type="button">Book firing</button>
           </div>
         </header>
 
-        <section class="status-grid" id="overview" aria-label="Infrastructure status">
+        <section class="metrics" aria-label="Studio metrics">
           <article>
-            <span class="label">Global uptime</span>
-            <strong>99.982%</strong>
-            <small class="positive">+0.011% this week</small>
+            <span>Bisque queue</span>
+            <strong>38</strong>
+            <small>pieces waiting - 72% shelf full</small>
           </article>
           <article>
-            <span class="label">Tenant SLO risk</span>
-            <strong>7</strong>
-            <small class="warning">3 enterprise accounts</small>
+            <span>Glaze queue</span>
+            <strong>24</strong>
+            <small>next cone 6 fire at 6:30 PM</small>
           </article>
           <article>
-            <span class="label">Deploy frequency</span>
-            <strong>42/day</strong>
-            <small class="positive">median lead time 18m</small>
+            <span>Ready pickups</span>
+            <strong>17</strong>
+            <small>auto-reminders sent today</small>
           </article>
           <article>
-            <span class="label">Projected cloud spend</span>
-            <strong>$84.2k</strong>
-            <small class="danger">+6.4% vs plan</small>
+            <span>Monthly revenue</span>
+            <strong>$4.8k</strong>
+            <small>classes, shelf fees, firings</small>
           </article>
         </section>
 
-        <section class="content-grid">
-          <section class="panel span-2" id="deploys" aria-labelledby="deploys-title">
+        <section class="workspace">
+          <section class="panel span-2" id="queue" aria-labelledby="queue-title">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow">Release train</p>
-                <h2 id="deploys-title">Live deployment lanes</h2>
+                <p class="eyebrow">Today</p>
+                <h2 id="queue-title">Kiln queue</h2>
               </div>
-              <button class="ghost-button" type="button">View runbook</button>
+              <button class="ghost-button" type="button">Print shelf tags</button>
             </div>
-            <div class="deploy-lanes">
-              <div class="lane">
-                <span class="lane-dot green"></span>
-                <strong>API gateway</strong>
-                <small>v2.18.4 rolling out · 87%</small>
-                <div class="meter"><span style="width: 87%"></span></div>
-              </div>
-              <div class="lane">
-                <span class="lane-dot amber"></span>
-                <strong>Billing worker</strong>
-                <small>canary paused · queue latency high</small>
-                <div class="meter"><span style="width: 31%"></span></div>
-              </div>
-              <div class="lane">
-                <span class="lane-dot blue"></span>
-                <strong>Tenant console</strong>
-                <small>preview validated · ready for prod</small>
-                <div class="meter"><span style="width: 100%"></span></div>
-              </div>
+
+            <div class="queue-list">
+              <article class="queue-item urgent">
+                <div class="queue-temp">
+                  <strong>04</strong>
+                  <span>cone</span>
+                </div>
+                <div>
+                  <h3>Community bisque</h3>
+                  <p>12 makers - 28 pieces - large platter needs top shelf clearance</p>
+                </div>
+                <span class="pill warm">Loading</span>
+              </article>
+
+              <article class="queue-item">
+                <div class="queue-temp">
+                  <strong>6</strong>
+                  <span>cone</span>
+                </div>
+                <div>
+                  <h3>Evening glaze fire</h3>
+                  <p>9 makers - 18 pieces - two crawl-risk glazes flagged</p>
+                </div>
+                <span class="pill cool">Scheduled</span>
+              </article>
+
+              <article class="queue-item">
+                <div class="queue-temp">
+                  <strong>10</strong>
+                  <span>cone</span>
+                </div>
+                <div>
+                  <h3>Wood soda test batch</h3>
+                  <p>Resident artists - 6 pieces - hold for Mira approval</p>
+                </div>
+                <span class="pill quiet">Waiting</span>
+              </article>
             </div>
           </section>
 
-          <section class="panel" id="incidents" aria-labelledby="incidents-title">
+          <section class="panel" id="calendar" aria-labelledby="calendar-title">
             <div class="panel-heading compact">
-              <p class="eyebrow">Current load</p>
-              <h2 id="incidents-title">Incident pressure</h2>
+              <p class="eyebrow">Capacity</p>
+              <h2 id="calendar-title">Shelf map</h2>
             </div>
-            <div class="pressure">
-              <span>Moderate</span>
-              <strong>34</strong>
-              <small>open alerts, 5 customer-visible</small>
+            <div class="shelf-map" aria-label="Kiln shelf occupancy">
+              <span class="filled"></span>
+              <span class="filled"></span>
+              <span></span>
+              <span class="filled"></span>
+              <span class="risk"></span>
+              <span class="filled"></span>
+              <span></span>
+              <span class="filled"></span>
+              <span></span>
             </div>
-            <ul class="clean-list">
-              <li><span></span>Auth p95 latency elevated</li>
-              <li><span></span>EU ingest retries climbing</li>
-              <li><span></span>One noisy synthetic probe</li>
-            </ul>
+            <div class="legend">
+              <span><i class="filled"></i>Occupied</span>
+              <span><i class="risk"></i>Needs review</span>
+              <span><i></i>Open</span>
+            </div>
           </section>
 
-          <section class="panel" id="tenants" aria-labelledby="tenants-title">
+          <section class="panel" id="members" aria-labelledby="members-title">
             <div class="panel-heading compact">
-              <p class="eyebrow">Accounts</p>
-              <h2 id="tenants-title">Tenant health</h2>
+              <p class="eyebrow">Members</p>
+              <h2 id="members-title">Pickup list</h2>
             </div>
-            <div class="tenant-list">
-              <div><strong>Northstar Labs</strong><span class="pill good">Healthy</span></div>
-              <div><strong>Mercury Bank</strong><span class="pill warn">SLO risk</span></div>
-              <div><strong>Orbital Works</strong><span class="pill good">Healthy</span></div>
-              <div><strong>Kindlecore</strong><span class="pill bad">Incident</span></div>
+            <div class="member-list">
+              <div><strong>Asha R.</strong><span>3 mugs ready</span></div>
+              <div><strong>Leo M.</strong><span>invoice unpaid</span></div>
+              <div><strong>Priya S.</strong><span>bowl needs photo</span></div>
+              <div><strong>Sam T.</strong><span>class set packed</span></div>
             </div>
           </section>
 
-          <section class="panel span-2" id="costs" aria-labelledby="costs-title">
+          <section class="panel span-2" id="notes" aria-labelledby="notes-title">
             <div class="panel-heading">
               <div>
-                <p class="eyebrow">FinOps</p>
-                <h2 id="costs-title">Spend anomalies by service</h2>
+                <p class="eyebrow">Studio memory</p>
+                <h2 id="notes-title">Firing notes</h2>
               </div>
-              <button class="ghost-button" type="button">Export</button>
+              <button class="ghost-button" type="button">Add note</button>
             </div>
-            <div class="cost-table" role="table" aria-label="Spend anomalies">
-              <div role="row">
-                <span role="columnheader">Service</span>
-                <span role="columnheader">Owner</span>
-                <span role="columnheader">Variance</span>
-                <span role="columnheader">Action</span>
-              </div>
-              <div role="row">
-                <span>Vector search</span>
-                <span>AI platform</span>
-                <strong>+18.7%</strong>
-                <span>right-size pods</span>
-              </div>
-              <div role="row">
-                <span>Warehouse sync</span>
-                <span>Data eng</span>
-                <strong>+9.1%</strong>
-                <span>cap retries</span>
-              </div>
-              <div role="row">
-                <span>Edge cache</span>
-                <span>Infra</span>
-                <strong>-4.3%</strong>
-                <span>keep policy</span>
-              </div>
+            <div class="notes-grid">
+              <article>
+                <strong>Glaze caution</strong>
+                <p>Blue ash is running hot on vertical forms. Ask members to wax higher.</p>
+              </article>
+              <article>
+                <strong>Maintenance</strong>
+                <p>Kiln B lid brick has a hairline crack. Avoid overnight holds until checked.</p>
+              </article>
+              <article>
+                <strong>Class batch</strong>
+                <p>Saturday beginners need bisque finished before Thursday open studio.</p>
+              </article>
             </div>
+          </section>
+
+          <section class="panel" id="billing" aria-labelledby="billing-title">
+            <div class="panel-heading compact">
+              <p class="eyebrow">Billing</p>
+              <h2 id="billing-title">Unbilled firings</h2>
+            </div>
+            <div class="billing-total">
+              <span>This week</span>
+              <strong>$642</strong>
+              <small>14 member charges queued</small>
+            </div>
+            <button class="wide-button" type="button">Review charges</button>
           </section>
         </section>
       </main>

@@ -1,8 +1,8 @@
 {
-  "name": "pulseplane",
+  "name": "kilnqueue",
   "version": "0.1.0",
   "private": true,
-  "description": "A compact SaaS infrastructure command center for monitoring tenant health, deploys, incidents, and cost drift.",
+  "description": "A simple SaaS product for ceramics studios to manage kiln bookings, shelf space, firing notes, and pickups.",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",
