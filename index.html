@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="PulsePlane is a SaaS infrastructure command center for deploys, incidents, tenants, and cost drift."
+    />
+    <title>PulsePlane</title>
+    <link rel="stylesheet" href="/src/styles.css" />
+  </head>
+  <body>
+    <div class="shell">
+      <aside class="sidebar" aria-label="Primary">
+        <a class="brand" href="/" aria-label="PulsePlane home">
+          <span class="brand-mark">P</span>
+          <span>
+            <strong>PulsePlane</strong>
+            <small>infra ops</small>
+          </span>
+        </a>
+
+        <nav class="nav">
+          <a class="active" href="#overview">Overview</a>
+          <a href="#deploys">Deploys</a>
+          <a href="#tenants">Tenants</a>
+          <a href="#incidents">Incidents</a>
+          <a href="#costs">Costs</a>
+        </nav>
+
+        <div class="environment">
+          <span>Environment</span>
+          <strong>Production</strong>
+          <small>us-east-1, eu-west-1, ap-south-1</small>
+        </div>
+      </aside>
+
+      <main>
+        <header class="topbar">
+          <div>
+            <p class="eyebrow">SaaS infrastructure cockpit</p>
+            <h1>Tenant health, deploy velocity, and cost drift in one sharp view.</h1>
+          </div>
+          <div class="actions">
+            <button class="icon-button" type="button" aria-label="Search">⌕</button>
+            <button class="icon-button" type="button" aria-label="Alerts">!</button>
+            <button class="primary-button" type="button">Ship deploy</button>
+          </div>
+        </header>
+
+        <section class="status-grid" id="overview" aria-label="Infrastructure status">
+          <article>
+            <span class="label">Global uptime</span>
+            <strong>99.982%</strong>
+            <small class="positive">+0.011% this week</small>
+          </article>
+          <article>
+            <span class="label">Tenant SLO risk</span>
+            <strong>7</strong>
+            <small class="warning">3 enterprise accounts</small>
+          </article>
+          <article>
+            <span class="label">Deploy frequency</span>
+            <strong>42/day</strong>
+            <small class="positive">median lead time 18m</small>
+          </article>
+          <article>
+            <span class="label">Projected cloud spend</span>
+            <strong>$84.2k</strong>
+            <small class="danger">+6.4% vs plan</small>
+          </article>
+        </section>
+
+        <section class="content-grid">
+          <section class="panel span-2" id="deploys" aria-labelledby="deploys-title">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">Release train</p>
+                <h2 id="deploys-title">Live deployment lanes</h2>
+              </div>
+              <button class="ghost-button" type="button">View runbook</button>
+            </div>
+            <div class="deploy-lanes">
+              <div class="lane">
+                <span class="lane-dot green"></span>
+                <strong>API gateway</strong>
+                <small>v2.18.4 rolling out · 87%</small>
+                <div class="meter"><span style="width: 87%"></span></div>
+              </div>
+              <div class="lane">
+                <span class="lane-dot amber"></span>
+                <strong>Billing worker</strong>
+                <small>canary paused · queue latency high</small>
+                <div class="meter"><span style="width: 31%"></span></div>
+              </div>
+              <div class="lane">
+                <span class="lane-dot blue"></span>
+                <strong>Tenant console</strong>
+                <small>preview validated · ready for prod</small>
+                <div class="meter"><span style="width: 100%"></span></div>
+              </div>
+            </div>
+          </section>
+
+          <section class="panel" id="incidents" aria-labelledby="incidents-title">
+            <div class="panel-heading compact">
+              <p class="eyebrow">Current load</p>
+              <h2 id="incidents-title">Incident pressure</h2>
+            </div>
+            <div class="pressure">
+              <span>Moderate</span>
+              <strong>34</strong>
+              <small>open alerts, 5 customer-visible</small>
+            </div>
+            <ul class="clean-list">
+              <li><span></span>Auth p95 latency elevated</li>
+              <li><span></span>EU ingest retries climbing</li>
+              <li><span></span>One noisy synthetic probe</li>
+            </ul>
+          </section>
+
+          <section class="panel" id="tenants" aria-labelledby="tenants-title">
+            <div class="panel-heading compact">
+              <p class="eyebrow">Accounts</p>
+              <h2 id="tenants-title">Tenant health</h2>
+            </div>
+            <div class="tenant-list">
+              <div><strong>Northstar Labs</strong><span class="pill good">Healthy</span></div>
+              <div><strong>Mercury Bank</strong><span class="pill warn">SLO risk</span></div>
+              <div><strong>Orbital Works</strong><span class="pill good">Healthy</span></div>
+              <div><strong>Kindlecore</strong><span class="pill bad">Incident</span></div>
+            </div>
+          </section>
+
+          <section class="panel span-2" id="costs" aria-labelledby="costs-title">
+            <div class="panel-heading">
+              <div>
+                <p class="eyebrow">FinOps</p>
+                <h2 id="costs-title">Spend anomalies by service</h2>
+              </div>
+              <button class="ghost-button" type="button">Export</button>
+            </div>
+            <div class="cost-table" role="table" aria-label="Spend anomalies">
+              <div role="row">
+                <span role="columnheader">Service</span>
+                <span role="columnheader">Owner</span>
+                <span role="columnheader">Variance</span>
+                <span role="columnheader">Action</span>
+              </div>
+              <div role="row">
+                <span>Vector search</span>
+                <span>AI platform</span>
+                <strong>+18.7%</strong>
+                <span>right-size pods</span>
+              </div>
+              <div role="row">
+                <span>Warehouse sync</span>
+                <span>Data eng</span>
+                <strong>+9.1%</strong>
+                <span>cap retries</span>
+              </div>
+              <div role="row">
+                <span>Edge cache</span>
+                <span>Infra</span>
+                <strong>-4.3%</strong>
+                <span>keep policy</span>
+              </div>
+            </div>
+          </section>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/src/main.ts"></script>
+  </body>
+</html>

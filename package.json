@@ -1,0 +1,16 @@
+{
+  "name": "pulseplane",
+  "version": "0.1.0",
+  "private": true,
+  "description": "A compact SaaS infrastructure command center for monitoring tenant health, deploys, incidents, and cost drift.",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "vite build",
+    "preview": "vite preview --host 127.0.0.1"
+  },
+  "dependencies": {
+    "vite": "^7.2.7",
+    "typescript": "^5.9.3"
+  },
+  "devDependencies": {}
+}
