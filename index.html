@@ -5,201 +5,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="KilnQueue helps ceramics studios manage kiln bookings, shelf space, firing notes, and member pickups."
+      content="BugBite turns messy customer complaints into clean bug tickets for paid users."
     />
-    <title>KilnQueue</title>
+    <title>BugBite</title>
     <link rel="stylesheet" href="/src/styles.css" />
   </head>
   <body>
-    <div class="app-shell">
-      <aside class="sidebar" aria-label="Primary">
-        <a class="brand" href="/" aria-label="KilnQueue home">
-          <span class="brand-mark">KQ</span>
-          <span>
-            <strong>KilnQueue</strong>
-            <small>studio firing desk</small>
-          </span>
+    <main class="page">
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="BugBite home">
+          <span class="brand-mark">B</span>
+          <span>BugBite</span>
         </a>
+        <div class="plan-pill" id="plan-pill">Free plan</div>
+      </header>
 
-        <nav class="nav">
-          <a class="active" href="#queue">Queue</a>
-          <a href="#members">Members</a>
-          <a href="#calendar">Calendar</a>
-          <a href="#notes">Notes</a>
-          <a href="#billing">Billing</a>
-        </nav>
+      <section class="hero">
+        <p class="eyebrow">One tiny support workflow</p>
+        <h1>Turn one messy customer complaint into a clean bug ticket.</h1>
+        <p>
+          Paste a rant, support note, or chat snippet. BugBite extracts the
+          issue, steps, expected result, actual result, severity, and owner.
+        </p>
+      </section>
 
-        <div class="studio-card">
-          <span>Studio</span>
-          <strong>North Loop Clay</strong>
-          <small>3 kilns - 148 active makers</small>
+      <section class="tool-shell" aria-label="Bug ticket generator">
+        <div class="composer">
+          <div class="section-heading">
+            <h2>Complaint</h2>
+            <button class="text-button" id="sample-button" type="button">Use sample</button>
+          </div>
+          <textarea
+            id="complaint"
+            placeholder="Paste a customer complaint here..."
+            rows="11"
+          ></textarea>
+          <button class="primary-button" id="generate-button" type="button">
+            Generate bug ticket
+          </button>
         </div>
-      </aside>
 
-      <main>
-        <header class="hero">
-          <div>
-            <p class="eyebrow">Simple SaaS product</p>
-            <h1>Kiln scheduling that keeps small ceramics studios calm.</h1>
-            <p class="subhead">
-              Track shelf space, firing windows, member pieces, glaze risk, and
-              pickup status without running the whole studio from a group chat.
+        <div class="result-panel" id="result-panel">
+          <div class="locked-state" id="locked-state">
+            <span class="lock-icon">LOCK</span>
+            <h2>Paid plan required</h2>
+            <p>
+              BugBite keeps the generator behind a plan layer. Upgrade to Pro
+              to unlock ticket generation for this test app.
             </p>
+            <div class="price-row">
+              <strong>$9</strong>
+              <span>/ month</span>
+            </div>
+            <button class="primary-button" id="unlock-button" type="button">
+              Simulate paid plan
+            </button>
           </div>
-          <div class="hero-actions">
-            <button class="icon-button" type="button" aria-label="Search bookings">?</button>
-            <button class="icon-button" type="button" aria-label="Notifications">!</button>
-            <button class="primary-button" type="button">Book firing</button>
+
+          <div class="ticket-state hidden" id="ticket-state">
+            <div class="section-heading">
+              <h2>Bug ticket</h2>
+              <button class="text-button" id="copy-button" type="button">Copy</button>
+            </div>
+            <pre id="ticket-output">Your generated ticket will appear here.</pre>
           </div>
-        </header>
+        </div>
+      </section>
+    </main>
 
-        <section class="metrics" aria-label="Studio metrics">
-          <article>
-            <span>Bisque queue</span>
-            <strong>38</strong>
-            <small>pieces waiting - 72% shelf full</small>
-          </article>
-          <article>
-            <span>Glaze queue</span>
-            <strong>24</strong>
-            <small>next cone 6 fire at 6:30 PM</small>
-          </article>
-          <article>
-            <span>Ready pickups</span>
-            <strong>17</strong>
-            <small>auto-reminders sent today</small>
-          </article>
-          <article>
-            <span>Monthly revenue</span>
-            <strong>$4.8k</strong>
-            <small>classes, shelf fees, firings</small>
-          </article>
-        </section>
-
-        <section class="workspace">
-          <section class="panel span-2" id="queue" aria-labelledby="queue-title">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Today</p>
-                <h2 id="queue-title">Kiln queue</h2>
-              </div>
-              <button class="ghost-button" type="button">Print shelf tags</button>
-            </div>
-
-            <div class="queue-list">
-              <article class="queue-item urgent">
-                <div class="queue-temp">
-                  <strong>04</strong>
-                  <span>cone</span>
-                </div>
-                <div>
-                  <h3>Community bisque</h3>
-                  <p>12 makers - 28 pieces - large platter needs top shelf clearance</p>
-                </div>
-                <span class="pill warm">Loading</span>
-              </article>
-
-              <article class="queue-item">
-                <div class="queue-temp">
-                  <strong>6</strong>
-                  <span>cone</span>
-                </div>
-                <div>
-                  <h3>Evening glaze fire</h3>
-                  <p>9 makers - 18 pieces - two crawl-risk glazes flagged</p>
-                </div>
-                <span class="pill cool">Scheduled</span>
-              </article>
-
-              <article class="queue-item">
-                <div class="queue-temp">
-                  <strong>10</strong>
-                  <span>cone</span>
-                </div>
-                <div>
-                  <h3>Wood soda test batch</h3>
-                  <p>Resident artists - 6 pieces - hold for Mira approval</p>
-                </div>
-                <span class="pill quiet">Waiting</span>
-              </article>
-            </div>
-          </section>
-
-          <section class="panel" id="calendar" aria-labelledby="calendar-title">
-            <div class="panel-heading compact">
-              <p class="eyebrow">Capacity</p>
-              <h2 id="calendar-title">Shelf map</h2>
-            </div>
-            <div class="shelf-map" aria-label="Kiln shelf occupancy">
-              <span class="filled"></span>
-              <span class="filled"></span>
-              <span></span>
-              <span class="filled"></span>
-              <span class="risk"></span>
-              <span class="filled"></span>
-              <span></span>
-              <span class="filled"></span>
-              <span></span>
-            </div>
-            <div class="legend">
-              <span><i class="filled"></i>Occupied</span>
-              <span><i class="risk"></i>Needs review</span>
-              <span><i></i>Open</span>
-            </div>
-          </section>
-
-          <section class="panel" id="members" aria-labelledby="members-title">
-            <div class="panel-heading compact">
-              <p class="eyebrow">Members</p>
-              <h2 id="members-title">Pickup list</h2>
-            </div>
-            <div class="member-list">
-              <div><strong>Asha R.</strong><span>3 mugs ready</span></div>
-              <div><strong>Leo M.</strong><span>invoice unpaid</span></div>
-              <div><strong>Priya S.</strong><span>bowl needs photo</span></div>
-              <div><strong>Sam T.</strong><span>class set packed</span></div>
-            </div>
-          </section>
-
-          <section class="panel span-2" id="notes" aria-labelledby="notes-title">
-            <div class="panel-heading">
-              <div>
-                <p class="eyebrow">Studio memory</p>
-                <h2 id="notes-title">Firing notes</h2>
-              </div>
-              <button class="ghost-button" type="button">Add note</button>
-            </div>
-            <div class="notes-grid">
-              <article>
-                <strong>Glaze caution</strong>
-                <p>Blue ash is running hot on vertical forms. Ask members to wax higher.</p>
-              </article>
-              <article>
-                <strong>Maintenance</strong>
-                <p>Kiln B lid brick has a hairline crack. Avoid overnight holds until checked.</p>
-              </article>
-              <article>
-                <strong>Class batch</strong>
-                <p>Saturday beginners need bisque finished before Thursday open studio.</p>
-              </article>
-            </div>
-          </section>
-
-          <section class="panel" id="billing" aria-labelledby="billing-title">
-            <div class="panel-heading compact">
-              <p class="eyebrow">Billing</p>
-              <h2 id="billing-title">Unbilled firings</h2>
-            </div>
-            <div class="billing-total">
-              <span>This week</span>
-              <strong>$642</strong>
-              <small>14 member charges queued</small>
-            </div>
-            <button class="wide-button" type="button">Review charges</button>
-          </section>
-        </section>
-      </main>
-    </div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

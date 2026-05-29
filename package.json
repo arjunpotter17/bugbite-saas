@@ -1,8 +1,8 @@
 {
-  "name": "kilnqueue",
+  "name": "bugbite",
   "version": "0.1.0",
   "private": true,
-  "description": "A simple SaaS product for ceramics studios to manage kiln bookings, shelf space, firing notes, and pickups.",
+  "description": "A tiny paid-access SaaS that turns one messy customer complaint into one clean bug ticket.",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
     "build": "vite build",

@@ -1,6 +1,8 @@
-# KilnQueue
+# BugBite
 
-KilnQueue is a simple SaaS product mockup for ceramics studios. It helps studio managers track kiln bookings, shelf space, firing notes, member pickups, and unbilled firing fees.
+BugBite is a tiny SaaS test app with one task: turn a messy customer complaint into a clean bug ticket.
+
+The generator is locked behind a simple paid-plan layer. For testing, the "Simulate paid plan" button stores a local Pro state and unlocks the tool.
 
 ## Run locally
 
