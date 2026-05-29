@@ -1,7 +1,11 @@
 const apiKey = process.env.BAGS_API_KEY;
 const apiBaseUrl = process.env.BAGS_API_BASE_URL || "https://getbags.app";
 const appUrl = process.env.APP_URL || "https://bugbite-saas.vercel.app";
-const network = process.env.BAGS_NETWORK || "base_sepolia";
+const networks = (process.env.BAGS_NETWORKS || process.env.BAGS_NETWORK || "base,solana")
+  .split(",")
+  .map((network) => network.trim())
+  .filter(Boolean);
+const primaryNetwork = networks[0] || "base";
 
 if (!apiKey) {
   console.error("Missing BAGS_API_KEY.");
@@ -31,7 +35,7 @@ const bagsFetch = async (path, body) => {
 const product = await bagsFetch("/api/products", {
   name: "BugBite Pro",
   description: "One-time access to the BugBite complaint-to-ticket generator.",
-  amount: "1.00",
+  amount: "0.10",
   currency: "USD",
   pricingType: "one_time",
   token: "USDC",
@@ -40,9 +44,10 @@ const product = await bagsFetch("/api/products", {
 
 const paymentLink = await bagsFetch("/api/payment-links", {
   productId: product.id,
-  network,
+  network: primaryNetwork,
+  networks,
   name: "BugBite Pro",
-  description: "Unlock BugBite Pro for one-time testing access.",
+  description: "Unlock BugBite Pro for one-time 10 cent testing access.",
   successUrl: `${appUrl}/?paid=success`,
   returnUrl: `${appUrl}/?paid=return`,
   merchantName: "BugBite",
@@ -62,7 +67,7 @@ console.log(
       productId: product.id,
       paymentLinkId: paymentLink.id,
       paymentLinkUrl: paymentLink.url || `${apiBaseUrl}/pay/${paymentLink.id}`,
-      network
+      networks
     },
     null,
     2

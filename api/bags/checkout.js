@@ -1,5 +1,6 @@
 const BAGS_API_BASE_URL = process.env.BAGS_API_BASE_URL || "https://getbags.app";
-const DEFAULT_NETWORK = process.env.BAGS_NETWORK || "base_sepolia";
+const DEFAULT_NETWORK = process.env.BAGS_NETWORK || "base";
+const SUPPORTED_NETWORKS = new Set(["base", "solana", "base_sepolia", "solana_devnet"]);
 
 const sendJson = (response, status, body) => {
   response.status(status).setHeader("content-type", "application/json");
@@ -43,7 +44,8 @@ module.exports = async function handler(request, response) {
   const origin =
     request.headers.origin ||
     `https://${request.headers["x-forwarded-host"] || request.headers.host}`;
-  const network = body.network || DEFAULT_NETWORK;
+  const requestedNetwork = body.network || DEFAULT_NETWORK;
+  const network = SUPPORTED_NETWORKS.has(requestedNetwork) ? requestedNetwork : DEFAULT_NETWORK;
 
   const payload = {
     productId: process.env.BAGS_PRODUCT_ID,

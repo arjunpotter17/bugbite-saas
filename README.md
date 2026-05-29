@@ -4,7 +4,7 @@ BugBite is a tiny SaaS test app with one task: turn a messy customer complaint i
 
 The generator is locked behind a Bags payment layer. The browser calls local Vercel API routes, those routes create and verify Bags checkout sessions server-side, and the tool unlocks only after Bags reports the checkout as complete.
 
-The current test plan is **BugBite Pro** for **$1.00**.
+The current test plan is **BugBite Pro** for **$0.10**.
 
 ## Bags environment
 
@@ -13,7 +13,7 @@ Set these in Vercel before production checkout will work:
 ```bash
 BAGS_API_KEY=bag_test_...
 BAGS_PRODUCT_ID=<bags-product-uuid>
-BAGS_NETWORK=base_sepolia
+BAGS_NETWORK=base
 ```
 
 Optional:
@@ -32,8 +32,8 @@ BAGS_API_KEY=bag_test_... npm run bags:create-plan
 
 The script creates:
 
-- a `$1.00` BugBite Pro product
-- a reusable Bags payment link for that product
+- a `$0.10` BugBite Pro product
+- a reusable Bags payment link for that product on Base and Solana
 
 Use the returned `productId` as `BAGS_PRODUCT_ID` in Vercel.
 

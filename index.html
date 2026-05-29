@@ -51,15 +51,22 @@
             <h2>Paid plan required</h2>
             <p>
               BugBite uses Bags hosted checkout for Pro access. Pay once with
-              USDC, return here, and the app verifies the checkout before
-              unlocking the generator.
+              USDC on Base or Solana, return here, and the app verifies the
+              checkout before unlocking the generator.
             </p>
             <label class="email-field">
               <span>Email for receipt</span>
               <input id="checkout-email" type="email" placeholder="you@example.com" />
             </label>
+            <label class="network-field">
+              <span>Payment network</span>
+              <select id="checkout-network">
+                <option value="base">Base</option>
+                <option value="solana">Solana</option>
+              </select>
+            </label>
             <div class="price-row">
-              <strong>$1</strong>
+              <strong>$0.10</strong>
               <span>one-time test plan</span>
             </div>
             <button class="primary-button" id="checkout-button" type="button">

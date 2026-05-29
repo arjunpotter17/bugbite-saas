@@ -7,6 +7,7 @@ const checkoutButton = document.querySelector<HTMLButtonElement>("#checkout-butt
 const sampleButton = document.querySelector<HTMLButtonElement>("#sample-button");
 const copyButton = document.querySelector<HTMLButtonElement>("#copy-button");
 const checkoutEmail = document.querySelector<HTMLInputElement>("#checkout-email");
+const checkoutNetwork = document.querySelector<HTMLSelectElement>("#checkout-network");
 const lockedState = document.querySelector<HTMLElement>("#locked-state");
 const ticketState = document.querySelector<HTMLElement>("#ticket-state");
 const ticketOutput = document.querySelector<HTMLElement>("#ticket-output");
@@ -114,7 +115,8 @@ checkoutButton?.addEventListener("click", async () => {
       method: "POST",
       headers: { "content-type": "application/json" },
       body: JSON.stringify({
-        email: checkoutEmail?.value.trim() || undefined
+        email: checkoutEmail?.value.trim() || undefined,
+        network: checkoutNetwork?.value || "base"
       })
     });
     const data = await response.json();
